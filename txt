@@ -1,0 +1,76 @@
+1.Что такое Promise и зачем он нужен?
+
+я это понимаю как:
+Есть асинннхронный код.
+и когда этот ассинхронный код закончился,тоеть код сработал и всё да,сработает Promise. Если будет какая-то ошибка при ассинхронной операции,сработает PRomise в виде ошибки и т.д с ассинхронной операции без ошибки.
+
+Пример:
+console.log('Checked your information');
+
+const Promise1 = new Promise((resolve, reject) => {
+     setTimeout(() => {
+         console.log('Hello Adama,вот твои данные:')
+         const data = {
+             name: 'Adama',
+             age: 18
+         }
+         reject(data)//тут можно написать и resolve()
+
+
+     }, 3000)
+} ).then((data) => {
+    console.log('Промис окончен', data)
+}).catch(err => console.error('ОШИБКАААА',err))
+
+2.Конструкция async\await
+
+ async и await это асихронность,он упрощает работу с Promise. async и await можно сказать "избавляет" от длинных цепочек Promise.
+
+const getTodo = () => {
+    fetch('https://jsonplaceholder.typicode.com/todos/1')
+    .then(response => response.json())
+    .then(json => console.log(json))
+}
+
+async function gwtTodo2() {
+    const res = await fetch('https://jsonplaceholder.typicode.com/todos/1')
+    return await res.json()
+
+}
+
+gwtTodo2()
+
+3.Контекст JS
+Контекст - это концепция,которое можно сказать описывает окружающий мир(в моем понимании).В котором производиться код.
+
+Пример:
+const user = {
+    name: 'Adama',
+    getName: ()=> {
+        console.log(this.name);
+    }
+};
+
+user.getName()
+
+4.Что такое замыкания?
+
+Замыкание - Замыкание это функция у которой есть доступ к своей внешней функции по области видимости, даже после того, как внешняя функция прекратилась.
+Ну или это когда функция,возвращает еще одну функцию.
+
+const person = ()=> {
+    let name = 'Muslim';
+
+    return function displayName() {
+      console.log(name);
+    };
+  }
+  let peter = person();
+  peter()
+
+5.Зачем нужны стрелочные функции, разница в функциях
+Разница такова:
+Во первых, стрелочная функцию намного компактней и удобней.
+Во-вторых, она упрощает работу с this, тем самым код становиться намного понятней,и лучше.
+В-третих, они отличються концепциями.
+И в четвёртых, у стрелочной функции нет hoisting и arguments
